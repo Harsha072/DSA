@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Arrays {
@@ -90,21 +91,103 @@ public class Arrays {
         return result;
     }
 
+    public boolean isValid(String s) {
+        HashMap<Character, Character> map = new HashMap<>();
+        map.put('}', '{');
+        map.put(')', '(');
+        map.put(']', '[');
+
+        ArrayList<Character> stack = new ArrayList<>();
+
+        for (int i = 0; i <s.length() ; i++) {
+            char c = s.charAt(i);
+            if(map.containsKey(c)){
+                if(stack.isEmpty()){
+                    return false;
+                }
+                char topElement = stack.remove(stack.size() - 1);
+                if(topElement!=map.get(c)){
+                    return  false;
+                }
+            }
+            else{
+                stack.add(c);
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public static int removeduplcateInPlace(int [] nums){
+        int k = 0;
+
+
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[k]!=nums[i]){
+                nums[k+1] = nums[i];
+                k++;
+            }
+
+        }
+        for (int i = 0; i <nums.length ; i++) {
+            System.out.println(nums[i]);
+        }
+        return k;
+    }
+
+    public static void mergeTwoSortedArray(int [] nums1, int [] nums2) {
+        int k = nums1.length - 1;
+
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            if (nums1[k] != nums2[i]) {
+                nums1[k] = nums2[i];
+                k--;
+            }
+        }
+        for (int j = 0; j < nums1.length; j++) {
+            System.out.println(nums1[j]);
+        }
+    }
+
+    public static void moveZerosToEnd(int [] nums1) {
+        int i=0;
+        int j = 0;
+
+        while(j<= nums1.length-1){
+            if(nums1[j]!=0){
+                int temp = nums1[j];
+                nums1[j] = nums1[i];
+                nums1[i] = temp;
+                i++;
+            }
+             j++;
+        }
+
+        for (int k = 0; k <nums1.length ; k++) {
+            System.out.println(nums1[k]);
+        }
+    }
+
+
+
     public static void main(String[] args) {
-    int [] myArr = {0, 1, 2, 2, 3, 0, 4, 2};
+    int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int val = 2;
+        int [] num1 = {1,0,1};
+        int [] nums2 = {2,5,6};
+
 //    deletingFromEnd(myArr);
         //insertAtEnd(myArr, 9, 2, 4 );
 //        insertAtithIndex(myArr, 5, 2);
-       int k = removeAllOccurances(myArr,val);
+      // int k = removeAllOccurances(myArr,val);
         System.out.print("First k elements: ");
-        for (int i = 0; i < k; i++) {
-            System.out.print(myArr[i] + " ");
-        }
-        int []  s =getConcatenation(myArr);
-        for (int i = 0; i <s.length ; i++) {
-            System.out.println(s[i]);
-        }
+
+       // int []  s =getConcatenation(myArr);
+//        for (int i = 0; i <s.length ; i++) {
+//            System.out.println(s[i]);
+//        }
+        //System.out.println(removeduplcateInPlace(myArr));
+        //mergeTwoSortedArray(num1, nums2);
+        moveZerosToEnd(num1);
 
     }
 }
