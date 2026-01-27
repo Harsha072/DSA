@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Arrays {
@@ -166,20 +167,135 @@ public class Arrays {
             System.out.println(nums1[k]);
         }
     }
+    public static void sumOfAll(int [] nums1) {
+        int [] results = new int[nums1.length];
+
+        int sum = 0;
+        for (int i = 0; i <nums1.length ; i++) {
+           sum = sum+nums1[i];
+           results[i] = sum;
+
+        }
+
+        for (int k = 0; k <results.length ; k++) {
+            System.out.println(results[k]);
+        }
+    }
+    public static int findNumbers(int[] nums) {
+        int count = 0; // Count of numbers with even digits
+
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            int digitCount = 0; // Count digits for this number
+
+            // Keep dividing by 10 until num becomes 0
+            while (num > 0) {
+               num = num/10;
+                // Increment digitCount
+                digitCount++;
+            }
+
+            if(digitCount%2==0){
+                count++;
+            }
+            // Check if digitCount is even
+            // If yes, increment count
+        }
+
+        System.out.println(count);
+        return count;
+    }
+    public static int consequtiveOnes(int[] nums) {
+        int count = 0; // Count of numbers with even digits
+
+        for (int i = 0; i <nums.length ; i++) {
+            if(nums[i]==1){
+                count++;
+            }
+            else count = 0;
+        }
+        System.out.println(count);
+        return count;
+    }
+    public static void disappeared(int[] nums) {
+        HashSet set = new HashSet();
+        ArrayList list = new ArrayList();
+        for (int i : nums){
+            set.add(i);
+        }
+
+        for (int i = 1; i <8 ; i++) {
+            if(!set.contains(i)){
+                list.add(i);
+            }
+        }
+
+        for (int i = 0; i <list.size() ; i++) {
+            System.out.println(list.get(i));
+        }
+    }
+    public static boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(nums[i])) {
+                return true;  // Found a duplicate!
+            }
+            set.add(nums[i]);
+        }
+
+        return false;
+    }
+
+    public static boolean isAnagram(String s, String t) {
+         int [] freq = new int[26];
+
+        for (int i = 0; i <s.length() ; i++) {
+            char c = s.charAt(i);
+            int index  = c - 'a';
+            freq[index]++;
+        }
+System.out.println("before sub s ");
+        for (int j : freq) {
+            System.out.println(j);
+        }
+
+
+        for (int i = 0; i <t.length() ; i++) {
+            char c = t.charAt(i);
+            int index  = c - 'a';
+            freq[index]--;
+        }
+
+        System.out.println("after sub s ");
+        for (int j : freq) {
+            System.out.println(j);
+        }
+
+        for (int j : freq) {
+            if (j != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 
 
 
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int val = 2;
-        int [] num1 = {1,0,1};
-        int [] nums2 = {2,5,6};
+        int [] num1 = {1,1,1,3,3,4,3,2,4,2};
+        int [] nums2 = {1,1,0,1,1,1};
 
 //    deletingFromEnd(myArr);
         //insertAtEnd(myArr, 9, 2, 4 );
 //        insertAtithIndex(myArr, 5, 2);
       // int k = removeAllOccurances(myArr,val);
-        System.out.print("First k elements: ");
+//        System.out.print("First k elements: ");
 
        // int []  s =getConcatenation(myArr);
 //        for (int i = 0; i <s.length ; i++) {
@@ -187,7 +303,14 @@ public class Arrays {
 //        }
         //System.out.println(removeduplcateInPlace(myArr));
         //mergeTwoSortedArray(num1, nums2);
-        moveZerosToEnd(num1);
+       // moveZerosToEnd(num1);
+
+       // findNumbers(num1);
+        //consequtiveOnes(nums2);
+      //  disappeared(num1);
+        containsDuplicate(num1);
+
+      System.out.println(isAnagram("carrace", "racecar"));
 
     }
 }
