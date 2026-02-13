@@ -1,11 +1,8 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
-public class Arrays {
+public class ArraysPractice {
 
     public static void read(int [] arr){
         for(int i=0;i< arr.length;i++){
@@ -248,49 +245,185 @@ public class Arrays {
     }
 
     public static boolean isAnagram(String s, String t) {
-         int [] freq = new int[26];
+        int [] freq= new int[26];
 
         for (int i = 0; i <s.length() ; i++) {
             char c = s.charAt(i);
-            int index  = c - 'a';
-            freq[index]++;
+            int index = c-'a';
+            freq[index] = freq[index]+1;
         }
-System.out.println("before sub s ");
-        for (int j : freq) {
-            System.out.println(j);
+        for (int i = 0; i <freq.length ; i++) {
+            System.out.println(freq[i]);
         }
-
-
         for (int i = 0; i <t.length() ; i++) {
             char c = t.charAt(i);
-            int index  = c - 'a';
-            freq[index]--;
+            int index = c-'a';
+            freq[index]= freq[index]-1;
         }
-
-        System.out.println("after sub s ");
-        for (int j : freq) {
-            System.out.println(j);
+        System.out.println("______________________________________________________________");
+        for (int i = 0; i <freq.length ; i++) {
+            System.out.println(freq[i]);
         }
-
-        for (int j : freq) {
-            if (j != 0) {
-                return false;
-            }
-        }
-
-        return true;
+         for(int j : freq){
+             if (j!=0){
+                 return false;
+             }
+         }
+        return  true;
     }
 
 
+    public static int [] revArray(int [] s) {
+
+        int i = 0;
+        int j = s.length-1;
+
+        if(s.length>1){
+            while (i<j){
+                int temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        else return s;
+
+        return s;
+    }
+    public static int [] rotateArray(int [] s) {
+        int i = 0;
+        int j = s.length-1;
+
+        if(s.length>1){
+            while (i<j){
+                int temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        return s;
+    }
+
+    private static void rotateFirstHalf(int[] myArr2, int k) {
+        int i = 0;
+        int j = k-1;
+        while (i<j){
+            int temp = myArr2[i];
+            myArr2[i] = myArr2[j];
+            myArr2[j] = temp;
+            i++;
+            j--;
+        }
+
+    }
+    private static void rotateSecondHalf(int[] myArr2, int k){
+        int i = k;
+        int j = myArr2.length-1;
+        while (i<j){
+            int temp = myArr2[i];
+            myArr2[i] = myArr2[j];
+            myArr2[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    public static List<List<String>> groupAnagrams(String[] strs) {
+          HashMap<String, List<String>> map = new HashMap<>();
+          List <List<String>> result  = new ArrayList<>();
+        for (int i = 0; i <strs.length ; i++) {
+            char [] ch = strs[i].toCharArray();
+            Arrays.sort(ch);
+            String str =new String(ch);
+            List<String> list = null;
+
+            if (map.containsKey(str)){
+                //get that value and add it to the list
+                List l = map.get(str);
+                l.add(strs[i]);
+            }
+            else{
+                list = new ArrayList<>();
+                list.add(strs[i]);
+                map.put(str, list);
+            }
+
+        }
+
+        result.addAll(map.values());
+        //need to get all hashmap values and return it
+        return result;
+    }
+
+    public static int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> count = new HashMap<>();
+
+        for (int i = 0; i <nums.length ; i++) {
+            count.put(nums[i], count.getOrDefault(nums[i],0)+1);
+        }
+
+        for(Map.Entry<Integer, Integer> entry: count.entrySet()){
+            System.out.println(entry.getKey()+" "+entry.getValue());
+        }
+        List<Integer> keys = new ArrayList<>(count.keySet());
+        keys.sort((a,b)-> count.get(b) - count.get(a));
+
+        int [] result = new int[k];
+        for (int i = 0; i <k ; i++) {
+
+            result[i] = keys.get(i);
+        }
+
+
+       return result;
+    }
+
+        public static int[] twoSum(int[] nums, int target) {
+          int []indexArray = new int[2];
+          HashMap<Integer, Integer> index = new HashMap<>();
+            for (int i = 0; i <nums.length ; i++) {
+                int difference = target-nums[i];
+                if(index.containsKey(difference)){
+                    indexArray[0]=index.get(difference);
+                    indexArray[1]=i;
+                 break;
+                }else{
+                    index.put(nums[i], i);
+                }
+            }
+            return indexArray;
+        }
 
 
 
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
+        int [] myArr2 = {1,2,3,4,5,6,7};
         int val = 2;
+        int k = 4;
         int [] num1 = {1,1,1,3,3,4,3,2,4,2};
         int [] nums2 = {1,1,0,1,1,1};
+       String [] strs = {"act","pots","tops","cat","stop","hat"};
+        topKFrequent(num1, 2);
+// List<List<String>> list =groupAnagrams(strs);
+//
+//        int [] twonum = {3,4,5,6};
 
+//        int [] res = revArray(myArr2);
+//        for (int i = 0; i <res.length ; i++) {
+//            System.out.println(res[i]);
+//        }
+//        rotateArray(myArr2);
+//        rotateFirstHalf(myArr2, k);
+//        rotateSecondHalf(myArr2, k);
+//
+//        for (int i = 0; i <myArr2.length ; i++) {
+//          System.out.println(myArr2[i]);
+//        }
 //    deletingFromEnd(myArr);
         //insertAtEnd(myArr, 9, 2, 4 );
 //        insertAtithIndex(myArr, 5, 2);
@@ -308,9 +441,11 @@ System.out.println("before sub s ");
        // findNumbers(num1);
         //consequtiveOnes(nums2);
       //  disappeared(num1);
-        containsDuplicate(num1);
+        //containsDuplicate(num1);
 
-      System.out.println(isAnagram("carrace", "racecar"));
-
+     //System.out.println(isAnagram("carracevv", "racecar"));
+      // int [] res =twoSum(twonum, 7);
     }
+
+
 }
