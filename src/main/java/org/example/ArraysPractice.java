@@ -382,6 +382,49 @@ public class ArraysPractice {
        return result;
     }
 
+    public static String encode(List<String> strs) {
+
+        String encoded = "";
+           for (String s : strs){
+               encoded += s.length()+"#"+(s);
+           }
+           System.out.println(encoded);
+
+        int i =0;
+
+        while(i < encoded.length()){
+            int indexOfHash = encoded.indexOf('#', i);
+            int lengthOfWord = Integer.parseInt(encoded.substring(i, indexOfHash));
+
+            String word =encoded.substring(indexOfHash+1, indexOfHash+1+lengthOfWord);
+
+
+            i = indexOfHash+1+lengthOfWord;
+        }
+           return encoded.toString();
+    }
+    public static int[] productExceptSelf(int[] nums) {
+
+        int pref = 1;
+        int [] result = new int[nums.length];
+        result[0]=1;
+
+        for (int i = 1; i <nums.length ; i++) {
+            result[i] = pref * nums[i-1];
+            pref = pref * nums[i-1];;
+        }
+
+        int post = 1;
+        for (int i = nums.length-1; i>=0 ; i--) {
+            result[i] = result[i]*post;
+            post = nums[i] *post;
+        }
+
+        for (int i = 0; i <result.length ; i++) {
+            System.out.println(result[i]);
+        }
+        return result;
+    }
         public static int[] twoSum(int[] nums, int target) {
           int []indexArray = new int[2];
           HashMap<Integer, Integer> index = new HashMap<>();
@@ -407,8 +450,21 @@ public class ArraysPractice {
         int k = 4;
         int [] num1 = {1,1,1,3,3,4,3,2,4,2};
         int [] nums2 = {1,1,0,1,1,1};
+        int [] nums3 = {1,2,3,4};
        String [] strs = {"act","pots","tops","cat","stop","hat"};
-        topKFrequent(num1, 2);
+        List<String> l = new ArrayList<>();
+        l.add("Hello");
+        l.add("World");
+
+        l.add("How");
+        l.add("are");
+        l.add("you");
+
+//        topKFrequent(num1, 2);
+
+        //encode(l);
+
+        productExceptSelf(nums3);
 // List<List<String>> list =groupAnagrams(strs);
 //
 //        int [] twonum = {3,4,5,6};
