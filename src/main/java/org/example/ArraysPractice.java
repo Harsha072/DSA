@@ -460,6 +460,28 @@ public class ArraysPractice {
         }
         return longest;
     }
+
+    public static boolean isPalindrome(String s) {
+        String words = s.replaceAll("[^a-zA-Z0-9]", "");
+        System.out.println(words);
+
+        char [] characters = words.toLowerCase().toCharArray();
+        int i = 0;
+        int j= characters.length-1;
+
+        while(i<j){
+            if(characters[i] != characters[j]){
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+
+
     public static boolean isValidSudoku(char[][] board) {
         for (int row = 0; row < 9; row++) {
             Set<Character> seen = new HashSet<>();
@@ -523,10 +545,10 @@ public class ArraysPractice {
                 {'.','.','.','4','1','9','.','.','8'},
                 {'.','.','.','.','8','.','.','7','9'}
         };
-        isValidSudoku(board);
-       System.out.println("returning");
-//        topKFrequent(num1, 2);
+      //  isValidSudoku(board);
 
+//        topKFrequent(num1, 2);
+        System.out.println(isPalindrome( "tab a cat"));
         //encode(l);
 
        // productExceptSelf(nums3);
