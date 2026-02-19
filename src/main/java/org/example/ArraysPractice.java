@@ -129,7 +129,7 @@ public class ArraysPractice {
         for (int i = 0; i <nums.length ; i++) {
             System.out.println(nums[i]);
         }
-        return k;
+        return k+1;
     }
 
     public static void mergeTwoSortedArray(int [] nums1, int [] nums2) {
@@ -460,6 +460,25 @@ public class ArraysPractice {
         }
         return longest;
     }
+    private static int removeduplcateInPlaceReturnCount(int[] myArr) {
+        int i = 0;
+        int j =0;
+        int count = 0;
+
+        while(j<myArr.length){
+            if (myArr[j]!=myArr[i]){
+                count += 1;
+                i=j;
+            }
+            else{
+                j++;
+            }
+        }
+        System.out.println(count);
+        return count;
+    }
+
+
 
     public static boolean isPalindrome(String s) {
         String words = s.replaceAll("[^a-zA-Z0-9]", "");
@@ -517,6 +536,8 @@ public class ArraysPractice {
     }
 
 
+
+
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int [] myArr2 = {1,2,3,4,5,6,7};
@@ -548,7 +569,7 @@ public class ArraysPractice {
       //  isValidSudoku(board);
 
 //        topKFrequent(num1, 2);
-        System.out.println(isPalindrome( "tab a cat"));
+       // System.out.println(isPalindrome( "tab a cat"));
         //encode(l);
 
        // productExceptSelf(nums3);
@@ -577,7 +598,8 @@ public class ArraysPractice {
 //        for (int i = 0; i <s.length ; i++) {
 //            System.out.println(s[i]);
 //        }
-        //System.out.println(removeduplcateInPlace(myArr));
+        //removeduplcateInPlaceReturnCount(myArr);
+       System.out.println(removeduplcateInPlace(myArr));
         //mergeTwoSortedArray(num1, nums2);
        // moveZerosToEnd(num1);
 
@@ -589,6 +611,6 @@ public class ArraysPractice {
      //System.out.println(isAnagram("carracevv", "racecar"));
       // int [] res =twoSum(twonum, 7);
     }
-
-
 }
+
+
