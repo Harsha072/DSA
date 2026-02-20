@@ -478,7 +478,24 @@ public class ArraysPractice {
         return count;
     }
 
+    public static int[] twoSum2(int[] numbers, int target) {
 
+        int low = 0;
+        int high = numbers.length-1;
+
+        while ( low<high){
+            if(numbers[low] + numbers[high] == target){
+                return  new int[]{low +1, high+1};
+            }
+            if(numbers[low] + numbers[high]<target){
+                low++;
+            }
+            if(numbers[low] + numbers[high]>target){
+                high--;
+            }
+        }
+        return  new int[]{low+1, high+1};
+    }
 
     public static boolean isPalindrome(String s) {
         String words = s.replaceAll("[^a-zA-Z0-9]", "");
@@ -546,6 +563,7 @@ public class ArraysPractice {
         int [] num1 = {1,1,1,3,3,4,3,2,4,2};
         int [] nums2 = {1,1,0,1,1,1};
         int [] nums3 = {1,2,3,4};
+        int [] nums4 = {1,2,3,4};
        String [] strs = {"act","pots","tops","cat","stop","hat"};
         List<String> l = new ArrayList<>();
         l.add("Hello");
@@ -567,7 +585,7 @@ public class ArraysPractice {
                 {'.','.','.','.','8','.','.','7','9'}
         };
       //  isValidSudoku(board);
-
+        twoSum2(nums4, 3);
 //        topKFrequent(num1, 2);
        // System.out.println(isPalindrome( "tab a cat"));
         //encode(l);
