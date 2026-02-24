@@ -569,7 +569,28 @@ public class ArraysPractice {
         return false;
     }
 
+    public static int maxArea(int[] heights) {
+        int l = 0;
+        int r  = heights.length-1;
+        int area = 0;
+        int res = 0;
+        while(l<r){
 
+            area = (r-l)* Integer.min(heights[l], heights[r]);
+            res = Integer.max(res, area);
+
+            if(heights[l]<heights[r]){
+                l++;
+            }
+            else if(heights[l]>heights[r]){
+                r--;
+            }
+            else{
+                r--;
+            }
+        }
+        return res;
+    }
 
 
     public static void main(String[] args) {
@@ -581,6 +602,7 @@ public class ArraysPractice {
         int [] nums2 = {1,1,0,1,1,1};
         int [] nums3 = {1,2,3,4};
         int [] nums4 = {-1,0,1,2,-1,-4};
+        int [] nums5 = {1,7,2,5,4,7,3,6};
        String [] strs = {"act","pots","tops","cat","stop","hat"};
         List<String> l = new ArrayList<>();
         l.add("Hello");
@@ -603,7 +625,8 @@ public class ArraysPractice {
         };
       //  isValidSudoku(board);
       //  twoSum2(nums4, 3);
-        threeSum(nums4);
+        //threeSum(nums4);
+        System.out.println(maxArea(nums5));
 
 //        topKFrequent(num1, 2);
        // System.out.println(isPalindrome( "tab a cat"));
