@@ -72,6 +72,48 @@ public class ArraysPractice {
         return k;
 
     }
+
+
+
+    public static int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        int sum = 0;
+        for(int i = 0;i<tokens.length;i++){
+            if(tokens[i].equals("+")  || tokens[i].equals("-") || tokens[i].equals("*")|| tokens[i].equals( "/")){
+                if(tokens[i].equals("+")){
+                    int a = stack.pop();
+                    int b = stack.pop();
+                    stack.push(a+b);
+                    }
+                if(tokens[i].equals("-")){
+                    int a  =  stack.pop();
+                    int b  =  stack.pop();
+
+                    stack.push(b-a);
+
+                }
+                if(tokens[i].equals("*")){
+                    int a = stack.pop();
+                    int b = stack.pop();
+                    stack.push(a*b);
+                }
+                if(tokens[i].equals("/")){
+                    int a = stack.pop();
+                    int b = stack.pop();
+                    stack.push(b/a);
+                }
+
+
+            }
+
+            else{
+                int c = Integer.parseInt(tokens[i]);
+                stack.push(c);
+            }
+        }
+
+        return  stack.pop();
+    }
     class MinStack {
 
         ArrayList<Integer> stack = null;
@@ -638,6 +680,7 @@ public class ArraysPractice {
         int [] nums3 = {1,2,3,4};
         int [] nums4 = {-1,0,1,2,-1,-4};
         int [] nums5 = {1,7,2,5,4,7,3,6};
+        String [] nums6 = {"1","2","+","3","*","4","-"};
        String [] strs = {"act","pots","tops","cat","stop","hat"};
         List<String> l = new ArrayList<>();
         l.add("Hello");
@@ -661,7 +704,9 @@ public class ArraysPractice {
       //  isValidSudoku(board);
       //  twoSum2(nums4, 3);
         //threeSum(nums4);
-        System.out.println(maxArea(nums5));
+      //  System.out.println(maxArea(nums5));
+
+        evalRPN(nums6);
 
 //        topKFrequent(num1, 2);
        // System.out.println(isPalindrome( "tab a cat"));
