@@ -669,6 +669,50 @@ public class ArraysPractice {
         return res;
     }
 
+    public int[] dailyTemperatures(int[] temperatures) {
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[temperatures.length];
+
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                int index = stack.pop();
+                result[index] = i - index;
+            }
+            stack.push(i);
+        }
+
+        return result;
+    }
+    public static int carFleet(int target, int[] position, int[] speed) {
+        double [] [] carAndSpeed = new double[position.length][2];
+        double timeTaken = 1.0;
+        Stack<Double> time = new Stack<>();
+        for (int i = 0; i <position.length ; i++) {
+            carAndSpeed[i][0] = position[i];
+            carAndSpeed[i][1] = speed[i];
+        }
+
+        Arrays.sort(carAndSpeed, (a, b) -> Double.compare(b[0], a[0]));
+
+      for (double[] doubles : carAndSpeed) {
+          if(!time.isEmpty()){
+              timeTaken = (target-doubles[0])/doubles[1];
+              if(timeTaken>time.peek()){
+                  time.push(timeTaken);
+              }
+          }
+          else{
+              timeTaken = (target - doubles[0]) / doubles[1];
+              time.push(timeTaken);
+          }
+
+        }
+
+
+
+
+        return time.size();
+    }
 
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
@@ -689,6 +733,8 @@ public class ArraysPractice {
         l.add("How");
         l.add("are");
         l.add("you");
+        int [] position = {4,1,0,7};
+        int [] speed = {2,2,1,1};
 
         char[][] board = new char[][]{
                 {'1','2','.','.','3','.','.','.','.'},
@@ -705,8 +751,8 @@ public class ArraysPractice {
       //  twoSum2(nums4, 3);
         //threeSum(nums4);
       //  System.out.println(maxArea(nums5));
-
-        evalRPN(nums6);
+        carFleet(10, position, speed);
+       // evalRPN(nums6);
 
 //        topKFrequent(num1, 2);
        // System.out.println(isPalindrome( "tab a cat"));
@@ -739,7 +785,7 @@ public class ArraysPractice {
 //            System.out.println(s[i]);
 //        }
         //removeduplcateInPlaceReturnCount(myArr);
-       System.out.println(removeduplcateInPlace(myArr));
+     //  System.out.println(removeduplcateInPlace(myArr));
         //mergeTwoSortedArray(num1, nums2);
        // moveZerosToEnd(num1);
 
