@@ -760,6 +760,36 @@ public class ArraysPractice {
       return false;
     }
 
+    public static int minEatingSpeed(int[] piles, int h) {
+        int left = 1;
+        int right = 0;
+        int res = 0;
+        int ans = right;
+        for (int pile : piles) {
+            if (pile > right) {
+                right = pile;
+            }
+        }
+
+        while(left <= right){
+            int k = (left+right)/2;
+             res = 0;
+            for (int i = 0; i < piles.length ; i++) {
+                res += Math.ceil((double) piles[i] /k);
+
+            }
+
+            if(res<=h){
+                ans = k;
+                right = k -1;
+            }
+            else if(res>=h){
+                left = k+1;
+            }
+        }
+     return ans;
+    }
+
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int [] myArr2 = {1,2,3,4,5,6,7};
@@ -770,6 +800,8 @@ public class ArraysPractice {
         int [] nums3 = {1,2,3,4};
         int [] nums4 = {-1,0,1,2,-1,-4};
         int [] nums5 = {1,7,2,5,4,7,3,6};
+       int [] piles = {1,4,3,2}; int h = 9;
+        System.out.println(minEatingSpeed(piles, h));;
         String [] nums6 = {"1","2","+","3","*","4","-"};
        String [] strs = {"act","pots","tops","cat","stop","hat"};
         List<String> l = new ArrayList<>();
@@ -841,7 +873,7 @@ public class ArraysPractice {
         //containsDuplicate(num1);
 
      //System.out.println(isAnagram("carracevv", "racecar"));
-       int [] res =twoSum(twonum, 7);
+       //int [] res =twoSum(twonum, 7);
     }
 }
 
