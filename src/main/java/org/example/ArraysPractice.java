@@ -714,6 +714,29 @@ public class ArraysPractice {
         return time.size();
     }
 
+    public int search(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length-1;
+
+        while (low<=high){
+            int mid = (low +high)/2;
+
+            if(target<nums[mid]){
+                high = mid -1;
+            }
+            else if(target >nums[mid]){
+                low = mid +1;
+            }
+            else{
+                return mid;
+            }
+
+        }
+        return -1;
+
+
+}
+
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int [] myArr2 = {1,2,3,4,5,6,7};
@@ -751,7 +774,7 @@ public class ArraysPractice {
       //  twoSum2(nums4, 3);
         //threeSum(nums4);
       //  System.out.println(maxArea(nums5));
-        carFleet(10, position, speed);
+      //  carFleet(10, position, speed);
        // evalRPN(nums6);
 
 //        topKFrequent(num1, 2);
@@ -761,7 +784,7 @@ public class ArraysPractice {
        // productExceptSelf(nums3);
 // List<List<String>> list =groupAnagrams(strs);
 //
-//        int [] twonum = {3,4,5,6};
+      int [] twonum = {3,4,5,6};
 
 //        int [] res = revArray(myArr2);
 //        for (int i = 0; i <res.length ; i++) {
@@ -795,7 +818,7 @@ public class ArraysPractice {
         //containsDuplicate(num1);
 
      //System.out.println(isAnagram("carracevv", "racecar"));
-      // int [] res =twoSum(twonum, 7);
+       int [] res =twoSum(twonum, 7);
     }
 }
 
