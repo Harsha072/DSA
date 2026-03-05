@@ -790,6 +790,22 @@ public class ArraysPractice {
      return ans;
     }
 
+    public int findMin(int[] nums) {
+          int l = 0;
+          int r = nums.length-1;
+          
+          while(l<=r){
+              int mid = (l+r)/2;
+              if(nums[mid]>nums[r]){
+                  l = mid +1;
+              } else {
+                  r = mid;
+              }
+
+          }
+          return nums[r];
+    }
+
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int [] myArr2 = {1,2,3,4,5,6,7};
