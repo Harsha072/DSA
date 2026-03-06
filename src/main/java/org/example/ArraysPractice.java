@@ -805,7 +805,32 @@ public class ArraysPractice {
           }
           return nums[r];
     }
+    public static int searchInRotatedArray(int[] nums, int target) {
+         int l = 0 ;
+         int r = nums.length-1;
 
+         while(l<=r){
+             int mid = (l+r)/2;
+
+             if(nums[mid] == target){
+                 return mid;
+             }
+             if(nums[l] <= nums[mid]){  // left half sorted
+                 if(nums[l] <= target && target < nums[mid]){
+                     r = mid - 1;  // search left
+                 } else {
+                     l = mid + 1;  // search right
+                 }
+             } else {  // right half sorted
+                 if(nums[mid] < target && target <= nums[r]){
+                     l = mid + 1;  // search right
+                 } else {
+                     r = mid - 1;  // search left
+                 }
+             }
+         }
+         return -1;
+    }
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int [] myArr2 = {1,2,3,4,5,6,7};
@@ -817,7 +842,11 @@ public class ArraysPractice {
         int [] nums4 = {-1,0,1,2,-1,-4};
         int [] nums5 = {1,7,2,5,4,7,3,6};
        int [] piles = {1,4,3,2}; int h = 9;
-        System.out.println(minEatingSpeed(piles, h));;
+
+        int [] nums7 = {3,5,6,0,1,2}; int target = 4;
+        System.out.println(searchInRotatedArray(nums7,target));
+
+       // System.out.println(minEatingSpeed(piles, h));;
         String [] nums6 = {"1","2","+","3","*","4","-"};
        String [] strs = {"act","pots","tops","cat","stop","hat"};
         List<String> l = new ArrayList<>();
