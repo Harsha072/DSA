@@ -831,6 +831,16 @@ public class ArraysPractice {
          }
          return -1;
     }
+
+
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
     int [] myArr = {0, 0, 1, 2, 2, 2, 3, 4};
         int [] myArr2 = {1,2,3,4,5,6,7};
@@ -844,7 +854,7 @@ public class ArraysPractice {
        int [] piles = {1,4,3,2}; int h = 9;
 
         int [] nums7 = {3,5,6,0,1,2}; int target = 4;
-        System.out.println(searchInRotatedArray(nums7,target));
+       // System.out.println(searchInRotatedArray(nums7,target));
 
        // System.out.println(minEatingSpeed(piles, h));;
         String [] nums6 = {"1","2","+","3","*","4","-"};
@@ -852,6 +862,8 @@ public class ArraysPractice {
         List<String> l = new ArrayList<>();
         l.add("Hello");
         l.add("World");
+
+
 
         l.add("How");
         l.add("are");
@@ -886,6 +898,12 @@ public class ArraysPractice {
 //
       int [] twonum = {3,4,5,6};
 
+      TimeMap t = new TimeMap();
+      t.set("alice","Happy", 1);
+        t.set("alice","sad", 3);
+        t.set("alice","angry", 4);
+        t.set("alice","very sad", 5);
+System.out.println(t.get("alice", 5));
 //        int [] res = revArray(myArr2);
 //        for (int i = 0; i <res.length ; i++) {
 //            System.out.println(res[i]);
