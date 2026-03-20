@@ -832,7 +832,29 @@ public class ArraysPractice {
          return -1;
     }
 
+public static int maxSubArray(int [] nums, int k ){
+        int sum = 0;
+        int l = 0;
+        int r = 0;
+        int maxLength = 0;
 
+
+    while(r < nums.length){
+        sum = sum + nums[r];
+
+        while(sum > k){
+            sum = sum - nums[l];
+            l++;
+        }
+
+        System.out.println("r=" + r + ", l=" + l + ", sum=" + sum + ", length=" + (r-l+1));
+        maxLength = Math.max(maxLength, r - l + 1);
+        r++;
+    }
+
+        return maxLength;
+
+}
 
 
 
@@ -896,14 +918,14 @@ public class ArraysPractice {
        // productExceptSelf(nums3);
 // List<List<String>> list =groupAnagrams(strs);
 //
-      int [] twonum = {3,4,5,6};
-
-      TimeMap t = new TimeMap();
-      t.set("alice","Happy", 1);
-        t.set("alice","sad", 3);
-        t.set("alice","angry", 4);
-        t.set("alice","very sad", 5);
-System.out.println(t.get("alice", 5));
+//      int [] twonum = {3,4,5,6};
+//
+//      TimeMap t = new TimeMap();
+//      t.set("alice","Happy", 1);
+//        t.set("alice","sad", 3);
+//        t.set("alice","angry", 4);
+//        t.set("alice","very sad", 5);
+//System.out.println(t.get("alice", 5));
 //        int [] res = revArray(myArr2);
 //        for (int i = 0; i <res.length ; i++) {
 //            System.out.println(res[i]);
@@ -929,7 +951,8 @@ System.out.println(t.get("alice", 5));
      //  System.out.println(removeduplcateInPlace(myArr));
         //mergeTwoSortedArray(num1, nums2);
        // moveZerosToEnd(num1);
-
+        int [] nums = {2,5,1,7,10};
+       System.out.println(maxSubArray(nums,14));
        // findNumbers(num1);
         //consequtiveOnes(nums2);
       //  disappeared(num1);
