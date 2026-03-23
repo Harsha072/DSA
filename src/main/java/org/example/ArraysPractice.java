@@ -805,6 +805,39 @@ public class ArraysPractice {
           }
           return nums[r];
     }
+
+    static String[] solve(int n){
+        ArrayList<String> ans = new ArrayList<>();
+
+        for(int i=1;i<n;i++){
+            if(i%3 ==0 && i%5==0){
+                ans.add(i,"FizzBuzz");
+            }
+          else if(i%3==0){
+                ans.add(i,"Fizz");
+            }
+            else if(i%5==0){
+                ans.add(i,"Buzz");
+            }
+            else ans.add(i,String.valueOf(i));
+        }
+        return ans.toArray(ans.toArray(new String[n]));
+    }
+
+    public static int  maxProfit(int[] prices) {
+        int l =0;
+        int r = 1;
+
+        while(r<prices.length-1){
+            if(prices[l]>prices[r]){
+
+            } else if (prices[l]<prices[r]) {
+
+            }
+        }
+        System.out.println(prices[r-1]-prices[l]);
+        return  prices[r-1]-prices[l];
+    }
     public static int searchInRotatedArray(int[] nums, int target) {
          int l = 0 ;
          int r = nums.length-1;
@@ -951,8 +984,16 @@ public static int maxSubArray(int [] nums, int k ){
      //  System.out.println(removeduplcateInPlace(myArr));
         //mergeTwoSortedArray(num1, nums2);
        // moveZerosToEnd(num1);
-        int [] nums = {2,5,1,7,10};
-       System.out.println(maxSubArray(nums,14));
+//        int [] nums = {2,5,1,7,10};
+//       System.out.println(maxSubArray(nums,14));
+
+//       int [] nums00 = {10,1,5,6,7,1};
+//        maxProfit(nums00);
+
+        String [] ans =solve(5);
+        for (int i = 0; i <ans.length ; i++) {
+            System.out.println(ans[i]);
+        }
        // findNumbers(num1);
         //consequtiveOnes(nums2);
       //  disappeared(num1);
