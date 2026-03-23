@@ -824,6 +824,33 @@ public class ArraysPractice {
         return ans.toArray(ans.toArray(new String[n]));
     }
 
+    static int trap(int[]  input){
+        int res = 0;
+        for (int i = 1; i <=input.length-2 ; i++) {
+            int lb = input[i];
+
+
+            for (int j = 0; j <i ; j++) {
+                if(input[j] > lb){
+                    lb = input[j];
+                }
+            }
+            int rb = input[i];
+            for (int j = i+1; j <input.length ; j++) {
+                if(input[j]>rb){
+                    rb = input[j];
+                }
+            }
+           int wl = Math.min(lb,rb);
+
+            int tw = wl-input[i];
+            res = res+tw;
+
+        }
+
+      return res;
+    }
+
     public static int  maxProfit(int[] prices) {
         int l =0;
         int r = 1;
@@ -990,10 +1017,12 @@ public static int maxSubArray(int [] nums, int k ){
 //       int [] nums00 = {10,1,5,6,7,1};
 //        maxProfit(nums00);
 
-        String [] ans =solve(5);
-        for (int i = 0; i <ans.length ; i++) {
-            System.out.println(ans[i]);
-        }
+//        String [] ans =solve(5);
+//        for (int i = 0; i <ans.length ; i++) {
+//            System.out.println(ans[i]);
+//        }
+        int [] height = {0,2,0,3,1,0,1,3,2,1};
+        System.out.println(trap(height));
        // findNumbers(num1);
         //consequtiveOnes(nums2);
       //  disappeared(num1);
