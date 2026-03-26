@@ -824,6 +824,35 @@ public class ArraysPractice {
         return ans.toArray(ans.toArray(new String[n]));
     }
 
+    static int trapOptimized(int[]  input){
+        int res = 0;
+
+        int [] lb = new int[input.length]; // make array for left most max boundary that can store water
+        int [] rb = new int[input.length];//make array for left most max boundary that can store water
+
+        lb[0] = input[0]; // since the first element and last element wont store any water then we initialise this with first element of left boundary
+
+        for (int i = 1; i <input.length ; i++) {
+            lb[i] = Math.max(lb[i-1], input[i]);// compare lb with left most max height
+        }
+        rb[rb.length-1] = input[rb.length-1]; // since the first element and last element wont store any water then we initialise this with first element of left boundary
+
+        for (int i = input.length-2; i >=0 ; i--) {
+            rb[i] = Math.max(rb[i+1], input[i]);// compare rb with right most max height
+        }
+
+        for (int i = 0; i <input.length ; i++) {
+            int wl = Math.min(lb[i],rb[i]);
+
+            int tw = wl-input[i];
+            res = res+tw;
+
+        }
+
+
+
+        return res;
+    }
     static int trap(int[]  input){
         int res = 0;
         for (int i = 1; i <=input.length-2 ; i++) {
@@ -1022,7 +1051,7 @@ public static int maxSubArray(int [] nums, int k ){
 //            System.out.println(ans[i]);
 //        }
         int [] height = {0,2,0,3,1,0,1,3,2,1};
-        System.out.println(trap(height));
+        System.out.println(trapOptimized(height));
        // findNumbers(num1);
         //consequtiveOnes(nums2);
       //  disappeared(num1);
