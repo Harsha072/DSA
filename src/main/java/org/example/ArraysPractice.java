@@ -851,6 +851,7 @@ public class ArraysPractice {
 
 
 
+
         return res;
     }
     static int trap(int[]  input){
@@ -883,17 +884,21 @@ public class ArraysPractice {
     public static int  maxProfit(int[] prices) {
         int l =0;
         int r = 1;
+        int maxProfit = 0;
+        while(r<prices.length){
+           if( prices[l]<prices[r]){
+                maxProfit = Math.max(maxProfit, prices[r]-prices[l]);
 
-        while(r<prices.length-1){
-            if(prices[l]>prices[r]){
-
-            } else if (prices[l]<prices[r]) {
-
-            }
+           }
+            else {
+                    l=r;
+                }
+            r++;
         }
-        System.out.println(prices[r-1]-prices[l]);
-        return  prices[r-1]-prices[l];
+
+        return maxProfit;
     }
+
     public static int searchInRotatedArray(int[] nums, int target) {
          int l = 0 ;
          int r = nums.length-1;
@@ -945,6 +950,25 @@ public static int maxSubArray(int [] nums, int k ){
 
 }
 
+    public static int lengthOfLongestSubstring(String s) {
+        int maxLen = 0;
+        int l =0;
+        int r =0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        while (r < s.length()) {
+            char c = s.charAt(r);
+
+            if (map.containsKey(c) && map.get(c) >= l) {
+                l = map.get(c) + 1;
+            }
+
+            map.put(c, r);
+            maxLen = Math.max(maxLen, r - l + 1);
+            r++;
+        }
+
+        return maxLen;
+    }
 
 
 
@@ -1043,15 +1067,15 @@ public static int maxSubArray(int [] nums, int k ){
 //        int [] nums = {2,5,1,7,10};
 //       System.out.println(maxSubArray(nums,14));
 
-//       int [] nums00 = {10,1,5,6,7,1};
+//       int [] nums00 = {5,1,5,6,7,1,10};
 //        maxProfit(nums00);
-
+        System.out.println(lengthOfLongestSubstring("cadbzabcd"));
 //        String [] ans =solve(5);
 //        for (int i = 0; i <ans.length ; i++) {
 //            System.out.println(ans[i]);
 //        }
-        int [] height = {0,2,0,3,1,0,1,3,2,1};
-        System.out.println(trapOptimized(height));
+//        int [] height = {0,2,0,3,1,0,1,3,2,1};
+//        System.out.println(trapOptimized(height));
        // findNumbers(num1);
         //consequtiveOnes(nums2);
       //  disappeared(num1);
