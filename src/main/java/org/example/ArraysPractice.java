@@ -223,6 +223,34 @@ public class ArraysPractice {
         }
     }
 
+
+    public static int totalFruit(int[] fruits) {
+        int l = 0;
+        int r = 0;
+        int maxFruits = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        while(r<fruits.length-1){
+
+            map.put(fruits[r], map.getOrDefault(fruits[r], 0) + 1);
+            r++;
+
+            while(map.size()>2){
+                map.put(fruits[l], map.getOrDefault(fruits[l], 0) - 1);
+                if(map.get(fruits[l])==0){
+                    map.remove(fruits[l]);
+
+                }
+                l++;
+            }
+            int windowSize = r - l + 1;
+            maxFruits = Math.max(maxFruits, windowSize);
+        }
+
+
+        return maxFruits;
+    }
+
     public static void moveZerosToEnd(int [] nums1) {
         int i=0;
         int j = 0;
@@ -436,27 +464,49 @@ public class ArraysPractice {
         return result;
     }
 
+//    public static int[] topKFrequent(int[] nums, int k) {
+//        HashMap<Integer, Integer> count = new HashMap<>();
+//
+//        for (int i = 0; i <nums.length ; i++) {
+//            count.put(nums[i], count.getOrDefault(nums[i],0)+1);
+//        }
+//
+//        for(Map.Entry<Integer, Integer> entry: count.entrySet()){
+//            System.out.println(entry.getKey()+" "+entry.getValue());
+//        }
+//        List<Integer> keys = new ArrayList<>(count.keySet());
+//        keys.sort((a,b)-> count.get(b) - count.get(a));
+//
+//        int [] result = new int[k];
+//        for (int i = 0; i <k ; i++) {
+//
+//            result[i] = keys.get(i);
+//        }
+//
+//
+//       return result;
+//    }
+
     public static int[] topKFrequent(int[] nums, int k) {
-        HashMap<Integer, Integer> count = new HashMap<>();
+
+       int [] number = new int[5];
 
         for (int i = 0; i <nums.length ; i++) {
-            count.put(nums[i], count.getOrDefault(nums[i],0)+1);
+            int count = 1;
+            for (int j = i+1; j <nums.length ; j++) {
+                if(nums[i]==nums[j]){
+                    count = count +1;
+                    number[nums[i]] = count;
+                }
+
+            }
+        }
+        for(int n : number){
+            System.out.println(n);
         }
 
-        for(Map.Entry<Integer, Integer> entry: count.entrySet()){
-            System.out.println(entry.getKey()+" "+entry.getValue());
-        }
-        List<Integer> keys = new ArrayList<>(count.keySet());
-        keys.sort((a,b)-> count.get(b) - count.get(a));
 
-        int [] result = new int[k];
-        for (int i = 0; i <k ; i++) {
-
-            result[i] = keys.get(i);
-        }
-
-
-       return result;
+        return null;
     }
 
     public static String encode(List<String> strs) {
@@ -518,6 +568,9 @@ public class ArraysPractice {
             return indexArray;
         }
 
+
+
+
     public int longestConsecutive(int[] nums) {
 
         HashSet set = new HashSet<>();
@@ -574,6 +627,79 @@ public class ArraysPractice {
         return  new int[]{low+1, high+1};
     }
 
+    public static int maxLenSubarray(int[] numbers, int target) {
+
+        int sum = 0;
+        int maxLen = 0;
+        HashMap<Integer, Integer> preMap = new HashMap<>();
+
+        for (int i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+
+            if (sum == target) {
+                maxLen = i + 1;
+            }
+
+            if (preMap.containsKey(sum - target)) {
+                int prevIndex = preMap.get(sum - target);
+                maxLen = Math.max(maxLen, i - prevIndex);
+            }
+
+            // store only first occurrence
+            if (!preMap.containsKey(sum)) {
+                preMap.put(sum, i);
+            }
+        }
+
+        return maxLen;
+    }
+    public static int maxLenSubarrayCount(int[] numbers, int target) {
+
+        int sum = 0;
+        int count = 0;
+        HashMap<Integer, Integer> preMap = new HashMap<>();
+
+        for (int i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+
+            if (sum == target) {
+
+            }
+
+            if (preMap.containsKey(sum - target)) {
+                int prevIndex = preMap.get(sum - target);
+                //maxLen = Math.max(maxLen, i - prevIndex);
+            }
+
+            // store only first occurrence
+            if (!preMap.containsKey(sum)) {
+                preMap.put(sum, i);
+            }
+        }
+
+        return 0;
+    }
+    public static int twoSumFindAll(int[] numbers, int target) {
+
+        HashSet<Integer> num = new HashSet<>();
+       int count = 0;
+        for (int i = 0; i <numbers.length ; i++) {
+            num.add(numbers[i]);
+        }
+
+        for (int k = 0; k <numbers.length ; k++) {
+            int diff = numbers[k]-target;
+
+            if(num.contains(diff)){
+                count = count +1;
+            }
+        }
+
+
+        return  count;
+    }
+
+
     public static List<List<Integer>> threeSum(int[] nums) {
 
         Set<List<Integer>> res = new HashSet<>();
@@ -591,6 +717,33 @@ public class ArraysPractice {
         return new ArrayList<>(res);
 
     }
+
+    public static Boolean isPal2(String s){
+
+
+            ArrayList<Character> characters = new ArrayList<>();
+            String lower = s.toLowerCase();
+            for(int i=0;i<lower.length();i++){
+
+                if(lower.charAt(i)>='a' && lower.charAt(i)<='z' && lower.charAt(i)!=' ' ){
+                    characters.add(lower.charAt(i));
+                }
+            }
+
+            int l = 0;
+            int r = characters.size()-1;
+
+            while(l<=r){
+                if(characters.get(l)!= characters.get(r)){
+                    return false;
+                }
+                l++;
+                r--;
+            }
+
+            return true;
+        }
+
     public static boolean isPalindrome(String s) {
         String words = s.replaceAll("[^a-zA-Z0-9]", "");
         System.out.println(words);
@@ -981,9 +1134,9 @@ public static int maxSubArray(int [] nums, int k ){
         int [] myArr2 = {1,2,3,4,5,6,7};
         int val = 2;
         int k = 4;
-        int [] num1 = {1,1,1,3,3,4,3,2,4,2};
+        int [] num1 = {1,2,1,2,1,2,3,1,3,2};
         int [] nums2 = {1,1,0,1,1,1};
-        int [] nums3 = {1,2,3,4};
+        int [] nums3 = {1,5,3,4,2};
         int [] nums4 = {-1,0,1,2,-1,-4};
         int [] nums5 = {1,7,2,5,4,7,3,6};
        int [] piles = {1,4,3,2}; int h = 9;
@@ -1023,15 +1176,16 @@ public static int maxSubArray(int [] nums, int k ){
       //  System.out.println(maxArea(nums5));
       //  carFleet(10, position, speed);
        // evalRPN(nums6);
-
-//        topKFrequent(num1, 2);
+   //    System.out.println(twoSumFindAll(nums3, 2));
+     //  topKFrequent(num1, 2);
        // System.out.println(isPalindrome( "tab a cat"));
+      //  System.out.println(isPal2( "A man, a plan, a canal: Panama"));
         //encode(l);
 
        // productExceptSelf(nums3);
 // List<List<String>> list =groupAnagrams(strs);
 //
-//      int [] twonum = {3,4,5,6};
+      int [] twonum = {3,4,5,6};
 //
 //      TimeMap t = new TimeMap();
 //      t.set("alice","Happy", 1);
@@ -1069,7 +1223,7 @@ public static int maxSubArray(int [] nums, int k ){
 
 //       int [] nums00 = {5,1,5,6,7,1,10};
 //        maxProfit(nums00);
-        System.out.println(lengthOfLongestSubstring("cadbzabcd"));
+    //    System.out.println(lengthOfLongestSubstring("cadbzabcd"));
 //        String [] ans =solve(5);
 //        for (int i = 0; i <ans.length ; i++) {
 //            System.out.println(ans[i]);
@@ -1079,10 +1233,11 @@ public static int maxSubArray(int [] nums, int k ){
        // findNumbers(num1);
         //consequtiveOnes(nums2);
       //  disappeared(num1);
+        int [] fruits = {1,2,3,2,2};
         //containsDuplicate(num1);
-
+        System.out.println(totalFruit(fruits));
      //System.out.println(isAnagram("carracevv", "racecar"));
-       //int [] res =twoSum(twonum, 7);
+      //  int [] res =twoSum(twonum, 7);
     }
 }
 
