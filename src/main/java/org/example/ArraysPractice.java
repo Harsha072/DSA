@@ -349,6 +349,47 @@ public class ArraysPractice {
         return false;
     }
 
+    public static boolean checkInclusion(String s1, String s2) {
+        int [] freq= new int[26];
+        int [] freq2 = new int[26];
+        for (int i = 0; i <s1.length() ; i++) {
+            char c = s1.charAt(i);
+            int index = c-'a';
+            freq[index] = freq[index]+1;
+        }
+
+
+        int l = 0;
+
+        for (int r = 0; r < s2.length() ; r++) {
+            char c = s2.charAt(r);
+            int index = c-'a';
+            freq2[index] = freq2[index]+1;
+
+            if(r-l+1> s1.length()){
+                //we shrink l decrase count
+                char c2 = s2.charAt(l);
+                int index2 = c2-'a';
+                freq2[index2] = freq2[index2]-1;
+                l++;
+            }
+            if(r-l+1 == s1.length()){
+                boolean match = true;
+                for (int i = 0; i <26 ; i++) {
+                    if(freq[i]!=freq2[i]){
+                        match= false;
+                        break;
+                    }
+
+                }
+                if(match) return true;
+            }
+        }
+
+
+        return false;
+    }
+
     public static boolean isAnagram(String s, String t) {
         int [] freq= new int[26];
 
@@ -1234,8 +1275,9 @@ public static int maxSubArray(int [] nums, int k ){
         //consequtiveOnes(nums2);
       //  disappeared(num1);
         int [] fruits = {1,2,3,2,2};
+        System.out.println(checkInclusion("abc", "lecaabee"));
         //containsDuplicate(num1);
-        System.out.println(totalFruit(fruits));
+        //System.out.println(totalFruit(fruits));
      //System.out.println(isAnagram("carracevv", "racecar"));
       //  int [] res =twoSum(twonum, 7);
     }
