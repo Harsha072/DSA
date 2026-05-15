@@ -417,7 +417,105 @@ public class ArraysPractice {
          }
         return  true;
     }
+    public static int characterReplacement(String s, int k) {
 
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        int maxLen = 0;
+        int maxf = 0;
+
+        int l = 0, r = 0;
+
+        while (r < s.length()) {
+
+            map.put(s.charAt(r),
+                    map.getOrDefault(s.charAt(r), 0) + 1);
+
+            maxf = Math.max(maxf, map.get(s.charAt(r)));
+
+            while ((r - l + 1) - maxf > k) {
+
+                map.put(s.charAt(l),
+                        map.get(s.charAt(l)) - 1);
+
+                l++;
+            }
+
+            maxLen = Math.max(maxLen, r - l + 1);
+
+            r++;
+        }
+
+        return maxLen;
+    }
+
+    public List<Integer> findAnagrams(String s, String p) {
+         int l = 0;
+         int r = p.length()-1;
+         HashMap<Character, Integer> map = new HashMap<>();
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < p.length(); i++) {
+            map.put(p.charAt(i), map.getOrDefault(p.charAt(i), 0)+1);
+        }
+        while(r<s.length()){
+            int count = p.length();
+            for (int k = r; k >=l ; k--) {
+                if(map.containsKey(s.charAt(k))){
+                   count= count -1;
+                }
+                else{
+                    break;
+                }
+            }
+            if(count==0) res.add(l);
+
+            l++;
+            r++;
+        }
+        return res;
+    }
+    public String minWindow(String s, String t) {
+
+        HashMap<Character, Integer> tmap = new HashMap<>();
+        int l = 0;
+        int count = t.length();
+        int minLen =   Integer.MAX_VALUE;
+        String ans = "";
+        for (int i = 0; i <t.length() ; i++) {
+            tmap.put(t.charAt(i), tmap.getOrDefault(t.charAt(i), 0)+1);
+        }
+
+        for (int right = 0; right < s.length(); right++) {
+
+            char c = s.charAt(right);
+
+            tmap.put(c, tmap.getOrDefault(c, 0) - 1);
+
+            if (tmap.get(c) >= 0) {
+                count--;
+            }
+
+            while (count == 0) {
+
+                if (right - l + 1 < minLen) {
+                    minLen = right - l + 1;
+                    ans = s.substring(l, right + 1);
+                }
+
+                char k = s.charAt(l);
+
+                tmap.put(k, tmap.get(k) + 1);
+
+                if (tmap.get(k) > 0) {
+                    count++;
+                }
+
+                l++;
+            }
+        }
+
+        return ans;
+    }
 
     public static int [] revArray(int [] s) {
 
@@ -1120,6 +1218,30 @@ public class ArraysPractice {
          return -1;
     }
 
+    public int maxSumSubarray(int[] nums, int k) {
+        // Step 1: Calculate sum of first window
+        int windowSum = 0;
+        for (int i = 0; i < k; i++) {
+            windowSum += nums[i];
+        }
+
+        // Step 2: Initialize max
+        int maxSum = windowSum;
+
+        // Step 3: Slide the window
+        for (int i = k; i < nums.length; i++) {
+            // Add new element, remove leftmost element
+            windowSum = windowSum + nums[i] - nums[i - k];
+
+            // Update max
+            maxSum = Math.max(maxSum, windowSum);
+        }
+
+        return maxSum;
+    }
+
+
+
 public static int maxSubArray(int [] nums, int k ){
         int sum = 0;
         int l = 0;
@@ -1191,8 +1313,8 @@ public static int maxSubArray(int [] nums, int k ){
         List<String> l = new ArrayList<>();
         l.add("Hello");
         l.add("World");
-
-
+int [] nums9 = {2, 1, 5, 1, 3, 2};
+        maxSumSubArray(nums9, 3);
 
         l.add("How");
         l.add("are");
@@ -1275,7 +1397,9 @@ public static int maxSubArray(int [] nums, int k ){
         //consequtiveOnes(nums2);
       //  disappeared(num1);
         int [] fruits = {1,2,3,2,2};
-        System.out.println(checkInclusion("abc", "lecaabee"));
+//        System.out.println(checkInclusion("abc", "lecaabee"));
+
+       // System.out.println(characterReplacement("AABABBA", 1));
         //containsDuplicate(num1);
         //System.out.println(totalFruit(fruits));
      //System.out.println(isAnagram("carracevv", "racecar"));
