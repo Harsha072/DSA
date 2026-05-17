@@ -1217,7 +1217,32 @@ public class ArraysPractice {
          }
          return -1;
     }
+    public long maximumSubarraySum(int[] nums, int k) {
+           HashMap<Integer, Integer> map = new HashMap<>();
+        int windowSum = 0;
+        int maxSum = 0;
+        for (int i = 0; i <k ; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0)+1);
+            windowSum = windowSum + nums[i];
+        }
 
+        for (int i = k; i <nums.length ; i++) {
+
+
+
+                int l = nums[i-k];
+                map.put(l, map.getOrDefault(l , 0)-1);
+                if(map.get(l)<1){
+                    map.remove(l);
+                }
+                map.put(nums[i], map.getOrDefault(nums[i],0)+1);
+
+                windowSum = windowSum + nums[i] - nums[i-k];
+                maxSum = Math.max(windowSum, maxSum);
+
+        }
+        return maxSum;
+    }
     public int maxSumSubarray(int[] nums, int k) {
         // Step 1: Calculate sum of first window
         int windowSum = 0;
