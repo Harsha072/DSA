@@ -1217,6 +1217,120 @@ public class ArraysPractice {
          }
          return -1;
     }
+
+    public static int minSubArrayLen(int target, int[] nums) {
+            int r = 0;
+            int l = 0;
+            int minLength = Integer.MAX_VALUE;
+
+            int sum = 0;
+            while(r<nums.length){
+                sum = sum+nums[r];
+
+                while(sum>=target){
+                    minLength = Math.min(minLength, r-l+1);
+                    sum = sum- nums[l];
+                    l++;
+                }
+
+                    r++;
+            }
+            if(minLength==Integer.MAX_VALUE)
+                return 0;
+            else return minLength;
+    }
+
+
+    public int subarraySum(int[] nums, int k) {
+        int curSum = 0;
+        int count = 0;
+          HashMap<Integer, Integer> map = new HashMap<>();
+           map.put(0,1);
+
+        for (int num : nums) {
+            curSum += num;
+            if (map.containsKey(curSum - k)) {
+                count += map.get(curSum - k);
+            }
+            map.put(curSum, map.getOrDefault(curSum, 0) + 1);
+        }
+
+          return count;
+    }
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        List<Integer> list = new ArrayList<>();
+        int l =0;
+        int r= 0;
+        int maxNum = 0;
+
+        if(nums.length==1){
+            return nums;
+        }
+        while(r<nums.length){
+                while(r-l+1<=k){
+                    maxNum = Math.max(maxNum, nums[r]);
+                    r++;
+                }
+
+                list.add(maxNum);
+                l++;
+
+
+        }
+        for(int c : list){
+            System.out.println(c);
+        }
+       return list.stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
+    public int longestOnes(int[] nums, int k) {
+           int l = 0;
+           int r= 0;
+           int countZero =0;
+           int maxLength = 0;
+           while(r<nums.length){
+               if(nums[r]==0){
+                   countZero++;
+               }
+               if(countZero<=k){
+                   maxLength = Math.max(maxLength,r-l+1);
+               } else {
+                   while (countZero>k){
+                       if(nums[l]==0){
+                           countZero= countZero-1;
+                       }
+                       l++;
+                   }
+                   maxLength = Math.max(maxLength,r-l+1);
+                   }
+                  r++;
+               }
+
+
+           return  maxLength;
+    }
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+
+              int r= 0;
+              int count = 0;
+              int maxount = 0;
+
+              while(r<nums.length){
+                  if(nums[r]==1){
+                      count++;
+                      maxount = Math.max(maxount, count);
+                      r++;
+                  }
+                  else if(nums[r]!=1){
+
+                      count = 0;
+                      r++;
+                  }
+              }
+               return maxount;
+    }
     public long maximumSubarraySum(int[] nums, int k) {
            HashMap<Integer, Integer> map = new HashMap<>();
         int windowSum = 0;
@@ -1338,8 +1452,8 @@ public static int maxSubArray(int [] nums, int k ){
         List<String> l = new ArrayList<>();
         l.add("Hello");
         l.add("World");
-int [] nums9 = {2, 1, 5, 1, 3, 2};
-        maxSumSubArray(nums9, 3);
+int [] nums9 = {1,1,1,1,1,1,1,1};
+//        System.out.println(minSubArrayLen(11, nums9));
 
         l.add("How");
         l.add("are");
@@ -1423,7 +1537,8 @@ int [] nums9 = {2, 1, 5, 1, 3, 2};
       //  disappeared(num1);
         int [] fruits = {1,2,3,2,2};
 //        System.out.println(checkInclusion("abc", "lecaabee"));
-
+        int [] nums99 = {1,3,-1,-3,5,3,6,7};
+        maxSlidingWindow(nums99,3);
        // System.out.println(characterReplacement("AABABBA", 1));
         //containsDuplicate(num1);
         //System.out.println(totalFruit(fruits));
