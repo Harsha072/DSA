@@ -1240,7 +1240,31 @@ public class ArraysPractice {
             else return minLength;
     }
 
+    public static int pivotIndex(int[] nums) {
+        int sum = 0;
+         int [] rightsum = new int[nums.length];
+         int [] leftsum = new int[nums.length];
+         int ans = -1;
+        for (int i = 0; i <nums.length ; i++) {
+              sum += nums[i];
+              leftsum[i] = sum;
+        }
+       sum = 0;
 
+        for (int j = nums.length-1; j >=0 ; j--) {
+            sum += nums[j];
+            rightsum[j] = sum;
+        }
+
+        for (int i = 0; i <rightsum.length ; i++) {
+            if(leftsum[i]==rightsum[i]){
+               ans = i;
+               break;
+            }
+        }
+
+return  ans;
+    }
     public int subarraySum(int[] nums, int k) {
         int curSum = 0;
         int count = 0;
@@ -1538,7 +1562,9 @@ int [] nums9 = {1,1,1,1,1,1,1,1};
         int [] fruits = {1,2,3,2,2};
 //        System.out.println(checkInclusion("abc", "lecaabee"));
         int [] nums99 = {1,3,-1,-3,5,3,6,7};
-        maxSlidingWindow(nums99,3);
+        //maxSlidingWindow(nums99,3);
+int[] nums100 = {1,7,3,6,5,6};
+        pivotIndex(nums100);
        // System.out.println(characterReplacement("AABABBA", 1));
         //containsDuplicate(num1);
         //System.out.println(totalFruit(fruits));
